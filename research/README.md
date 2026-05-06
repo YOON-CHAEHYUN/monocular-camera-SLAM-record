@@ -36,3 +36,9 @@ When adding content, distinguish:
 4. Update open questions and next steps.
 5. Update the paper outline when the new information affects the manuscript argument.
 
+## Auto-Sync
+
+This repository includes `scripts/auto_sync.sh`, which can periodically commit vault changes and attempt to push them to `origin`. If GitHub authentication is not configured yet, the push step may fail, but the local commit remains available.
+
+Auto-sync log file: `.auto-sync.log`
+

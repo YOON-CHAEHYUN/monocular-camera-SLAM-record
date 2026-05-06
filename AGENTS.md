@@ -48,3 +48,11 @@ This workspace is a research Markdown vault for accumulating experiment records,
 - If a user asks to ingest a source, connect it to research questions, hypotheses, experiment design, findings, and the paper outline instead of only writing a paper summary.
 - If a user asks to reflect an experiment, create or update an experiment note first, then propagate only the distilled implications to context, hypotheses, findings, open questions, next steps, and paper outline.
 
+## Auto-Sync
+
+- `scripts/auto_sync.sh` is the repository-local auto-sync script.
+- The script stages `AGENTS.md`, `research/`, `.gitignore`, and itself, commits any changes, and then attempts `git push` if `origin` exists.
+- If remote authentication is unavailable, push failure is acceptable; the local commit is preserved.
+- The script writes operational logs to `.auto-sync.log`, which is intentionally ignored by Git.
+- Do not rely on auto-sync as a substitute for careful research updates. Codex must still update the correct Markdown files with evidence links and clear fact/observation/interpretation/speculation separation.
+
