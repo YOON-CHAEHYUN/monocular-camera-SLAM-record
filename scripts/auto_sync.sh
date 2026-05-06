@@ -41,7 +41,14 @@ else
 fi
 
 if git remote get-url origin >/dev/null 2>&1; then
-  if git push >> "$LOG_FILE" 2>&1; then
+  current_branch="$(git branch --show-current)"
+  if git rev-parse --abbrev-ref --symbolic-full-name "@{u}" >/dev/null 2>&1; then
+    push_command=(git push)
+  else
+    push_command=(git push -u origin "$current_branch")
+  fi
+
+  if "${push_command[@]}" >> "$LOG_FILE" 2>&1; then
     log "push succeeded"
   else
     log "push failed; local commit preserved"
@@ -49,4 +56,3 @@ if git remote get-url origin >/dev/null 2>&1; then
 else
   log "no origin remote; local commit preserved"
 fi
-
