@@ -57,3 +57,8 @@ Current status:
   median became `0.839 m`, or `DA2/pose_z ~= 0.734x` with nominal local scale
   `1.36`. This is tentative and must be repeated at another distance before
   changing runtime DA2 parameters.
+- A repositioned-board repeat collected only 3 valid samples but had low pose
+  RMS (`~0.071 px`) and produced `pose_z ~= 0.701 m`, `DA2 ~= 0.935 m`, or
+  `DA2/pose_z ~= 1.334x` with nominal local scale `0.749`. The disagreement
+  with the previous board pose strengthens the finding that a single global DA2
+  scale is not defensible yet.

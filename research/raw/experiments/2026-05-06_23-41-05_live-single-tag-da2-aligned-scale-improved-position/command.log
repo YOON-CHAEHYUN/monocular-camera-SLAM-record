@@ -1,0 +1,22 @@
+$ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_ws/install/setup.bash\ \&\&\ timeout\ 40s\ python3\ /home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py\ --family\ tag16h5\ --layout\ single_tags\ --max-hamming\ 2\ --preprocess\ clahe\ --margin-min\ 20\ --frames\ 40\ --min-tags\ 6\ --max-single-tag-reproj-rms\ 4.0\ --rotate-da2-mask\ --output-csv\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_improved.csv\ --summary-json\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_improved_summary.json\ --debug-png\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_improved.png 
+
+[INFO] [1778078467.543034411] [live_aprilgrid_depth_check]: AprilGrid family=tag16h5, tags=6x6, tag_size=0.0880m, spacing=0.0264m, board=0.660x0.660m
+[INFO] [1778078467.681881440] [live_aprilgrid_depth_check]: frame=1 tags=6 rms=0.07px layout=single_tags pose_z=1.708m pose_norm=1.727m da2=1.748m da2/pose_z=1.023 hw=0.438m hw/pose_z=0.256
+[INFO] [1778078467.874046506] [live_aprilgrid_depth_check]: frame=2 tags=6 rms=0.08px layout=single_tags pose_z=1.706m pose_norm=1.735m da2=1.701m da2/pose_z=0.997 hw=0.430m hw/pose_z=0.252
+[INFO] [1778078468.065622948] [live_aprilgrid_depth_check]: frame=3 tags=8 rms=0.68px layout=single_tags pose_z=1.633m pose_norm=1.657m da2=1.758m da2/pose_z=1.076 hw=0.429m hw/pose_z=0.263
+[INFO] [1778078469.232428897] [live_aprilgrid_depth_check]: frame=8 tags=8 rms=1.37px layout=single_tags pose_z=1.549m pose_norm=1.550m da2=1.817m da2/pose_z=1.173 hw=0.438m hw/pose_z=0.283
+[INFO] [1778078470.261869667] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[3, 5, 12, 21, 25, 28]
+[INFO] [1778078471.427503743] [live_aprilgrid_depth_check]: frame=14 tags=6 rms=0.70px layout=single_tags pose_z=1.639m pose_norm=1.681m da2=1.720m da2/pose_z=1.049 hw=0.438m hw/pose_z=0.267
+[INFO] [1778078472.697459742] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[10, 15, 21, 24, 25, 28]
+[INFO] [1778078473.984628200] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=5 seen=[1, 20, 21, 25, 29]
+[INFO] [1778078475.095101374] [live_aprilgrid_depth_check]: frame=22 tags=8 rms=0.07px layout=single_tags pose_z=1.712m pose_norm=1.738m da2=1.827m da2/pose_z=1.068 hw=0.438m hw/pose_z=0.256
+[INFO] [1778078476.138119592] [live_aprilgrid_depth_check]: frame=26 tags=8 rms=0.91px layout=single_tags pose_z=1.604m pose_norm=1.630m da2=1.962m da2/pose_z=1.223 hw=0.441m hw/pose_z=0.275
+[INFO] [1778078477.770221873] [live_aprilgrid_depth_check]: frame=30 tags=9 rms=0.07px layout=single_tags pose_z=1.702m pose_norm=1.724m da2=1.676m da2/pose_z=0.984 hw=0.438m hw/pose_z=0.257
+[INFO] [1778078478.996991675] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=5 seen=[1, 2, 12, 21, 25, 28]
+[INFO] [1778078480.181524824] [live_aprilgrid_depth_check]: frame=36 tags=8 rms=0.06px layout=single_tags pose_z=1.717m pose_norm=1.747m da2=1.739m da2/pose_z=1.013 hw=0.429m hw/pose_z=0.250
+[INFO] [1778078481.258869657] [live_aprilgrid_depth_check]: frame=38 tags=8 rms=0.75px layout=single_tags pose_z=1.641m pose_norm=1.662m da2=1.746m da2/pose_z=1.064 hw=0.439m hw/pose_z=0.267
+[INFO] [1778078483.679899210] [live_aprilgrid_depth_check]: frame=39 tags=6 rms=0.07px layout=single_tags pose_z=1.710m pose_norm=1.744m da2=1.671m da2/pose_z=0.977 hw=0.438m hw/pose_z=0.256
+[INFO] [1778078484.159749762] [live_aprilgrid_depth_check]: FINAL samples=40 pose_z_med=1.705m rms_med=0.08px DA2/pose_z=1.0315 DA2 scale=0.9694
+[INFO] [1778078484.160347123] [live_aprilgrid_depth_check]: FINAL HW/pose_z=0.2542 HW scale=3.9346
+[INFO] [1778078484.160859654] [live_aprilgrid_depth_check]: Saved CSV: /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_improved.csv
+[INFO] [1778078484.161362617] [live_aprilgrid_depth_check]: Saved summary: /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_improved_summary.json

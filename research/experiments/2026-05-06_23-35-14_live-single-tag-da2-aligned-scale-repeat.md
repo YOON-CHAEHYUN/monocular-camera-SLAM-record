@@ -10,7 +10,7 @@ Live single-tag DA2-aligned scale repeat
 
 ## Status
 
-failed
+tentative
 
 ## Recording Contract
 
@@ -79,14 +79,34 @@ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_w
 - **Fact:** The command exited with code `124`.
 - **Observation:** Raw command output is saved at [command.log](../raw/experiments/2026-05-06_23-35-14_live-single-tag-da2-aligned-scale-repeat/command.log).
 - **Artifact paths:** [raw experiment directory](../raw/experiments/2026-05-06_23-35-14_live-single-tag-da2-aligned-scale-repeat/)
-- **Result validity:** needs verification: mark valid, invalid, tentative, or superseded.
+- **Observation:** Only 3 valid frames were collected before timeout because most
+  frames had fewer than 6 valid tag poses after filtering.
+- **Observation:** Median single-tag reprojection RMS was `0.071 px`, so the
+  accepted tag poses are geometrically consistent.
+- **Observation:** Median pose_z was `0.701 m`.
+- **Observation:** Median DA2 sampled depth was `0.935 m`, giving
+  `DA2/pose_z = 1.334x` and nominal local scale `0.749`.
+- **Observation:** Median hardware-depth sampled value was `0.310 m`; this is
+  still not physically consistent with the RGB pose.
+- **Artifact paths:**
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_repeat.csv`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_repeat_summary.json`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_repeat.png`.
+- **Result validity:** tentative. Pose quality is good for accepted frames, but
+  the sample count is too low for final calibration.
 
 ## Interpretation
 
-- **Interpretation:** pending review of repeated DA2-aligned single-tag scale summary
+- **Interpretation:** The repositioned board produced a different local
+  DA2/pose ratio than the previous pose (`1.334x` at `0.701 m` vs `0.734x` at
+  `1.143 m`). This strongly suggests the DA2 scale behavior is dependent on
+  range/target/framing or that residual ROI/model assumptions remain.
 - **Speculation:** tentative
-- **Hypothesis update:** unresolved
-- **Reasoning:** needs verification: explain why the result should or should not affect calibration/navigation decisions.
+- **Hypothesis update:** strengthened. A single global depth scale is not
+  supported by the two board-position checks.
+- **Reasoning:** The accepted tag poses have very low RMS, but only three frames
+  passed the filter. The value is useful as a warning against global scaling,
+  not as a final parameter.
 
 ## Finding Updates
 
@@ -94,11 +114,17 @@ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_w
 
 ## Failure Notes
 
-Command failed. Review [command.log](../raw/experiments/2026-05-06_23-35-14_live-single-tag-da2-aligned-scale-repeat/command.log) before interpreting the result.
+The command timed out before collecting 40 frames. This is not a hard sensor
+failure because the script saved 3 valid samples, but the low sample count makes
+the result tentative.
 
 ## Follow-up
 
-- Compare repeated ratio against previous run and decide whether another distance or BEV/LiDAR validation is needed before changing DA2 params.
+- Do not change DA2 runtime scale from this 3-frame result.
+- For the next board run, reduce `--min-tags` to 3 or improve lighting/framing
+  so enough frames pass while preserving low reprojection RMS.
+- Compare accepted board-scale candidates against BEV/LiDAR map alignment
+  before changing DA2 params.
 - Update [[Findings]] / [../findings.md](../findings.md) with a link to this note.
 - Update [[Open Questions]] / [../open_questions.md](../open_questions.md) and [[Next Steps]] / [../next_steps.md](../next_steps.md).
 - If the experiment produced invalid results, preserve the note and mark the invalidation reason.
@@ -110,4 +136,3 @@ Command failed. Review [command.log](../raw/experiments/2026-05-06_23-35-14_live
 - [[Findings]] / [../findings.md](../findings.md)
 - [[Open Questions]] / [../open_questions.md](../open_questions.md)
 - [[Next Steps]] / [../next_steps.md](../next_steps.md)
-
