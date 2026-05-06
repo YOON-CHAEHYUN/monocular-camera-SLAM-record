@@ -10,7 +10,7 @@ Live single-tag DA2-aligned scale farther
 
 ## Status
 
-failed
+tentative
 
 ## Recording Contract
 
@@ -79,14 +79,35 @@ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_w
 - **Fact:** The command exited with code `124`.
 - **Observation:** Raw command output is saved at [command.log](../raw/experiments/2026-05-06_23-46-26_live-single-tag-da2-aligned-scale-farther/command.log).
 - **Artifact paths:** [raw experiment directory](../raw/experiments/2026-05-06_23-46-26_live-single-tag-da2-aligned-scale-farther/)
-- **Result validity:** needs verification: mark valid, invalid, tentative, or superseded.
+- **Observation:** 12 valid samples were collected before timeout.
+- **Observation:** Median tag count was `7`; p10-p90 was `6-8`.
+- **Observation:** Median single-tag reprojection RMS was `0.148 px`;
+  p10-p90 was `0.108-0.432 px`.
+- **Observation:** Median pose_z was `3.229 m`; p10-p90 was
+  `3.185-3.244 m`.
+- **Observation:** Median DA2 sampled depth was `1.857 m`.
+- **Observation:** Median `DA2/pose_z` was `0.584x`; p10-p90 was
+  `0.566-0.631x`.
+- **Observation:** Nominal local DA2 scale from pose_z was `1.712`.
+- **Artifact paths:**
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_farther.csv`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_farther_summary.json`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_farther.png`.
+- **Result validity:** tentative. Pose quality is acceptable, but the sample
+  count is lower than the preferred 40 samples and DA2 ROI sometimes had too few
+  valid pixels.
 
 ## Interpretation
 
-- **Interpretation:** pending review of farther-distance DA2-aligned single-tag scale summary
+- **Interpretation:** At the farther board position around `3.23 m`, DA2 depth
+  is much shorter than the geometric pose distance. This differs from the
+  improved `1.70 m` result, where DA2 was close to pose.
 - **Speculation:** tentative
-- **Hypothesis update:** unresolved
-- **Reasoning:** needs verification: explain why the result should or should not affect calibration/navigation decisions.
+- **Hypothesis update:** strengthened. The distance sweep now shows strong
+  distance dependence rather than a stable global scale.
+- **Reasoning:** The accepted poses have low RMS and stable pose_z, so the
+  trend is meaningful. Because the target is small at this distance and only 12
+  samples were collected, the exact `1.71` scale should be treated as tentative.
 
 ## Finding Updates
 
@@ -94,11 +115,17 @@ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_w
 
 ## Failure Notes
 
-Command failed. Review [command.log](../raw/experiments/2026-05-06_23-46-26_live-single-tag-da2-aligned-scale-farther/command.log) before interpreting the result.
+The command timed out before collecting 40 frames. Several frames had
+insufficient tags or too few valid DA2 pixels. The saved 12-sample result is a
+tentative distance-sweep point, not a final calibration value.
 
 ## Follow-up
 
-- Add this point to the distance sweep table and decide whether another planned distance is needed.
+- Add this point to the distance sweep table as tentative.
+- For another far-distance run, reduce `--min-tags` to 4 or enlarge/improve
+  board visibility, but keep RMS checks strict.
+- Do not apply a global scale from this point alone; validate any candidate
+  correction against BEV/LiDAR map alignment.
 - Update [[Findings]] / [../findings.md](../findings.md) with a link to this note.
 - Update [[Open Questions]] / [../open_questions.md](../open_questions.md) and [[Next Steps]] / [../next_steps.md](../next_steps.md).
 - If the experiment produced invalid results, preserve the note and mark the invalidation reason.
@@ -110,4 +137,3 @@ Command failed. Review [command.log](../raw/experiments/2026-05-06_23-46-26_live
 - [[Findings]] / [../findings.md](../findings.md)
 - [[Open Questions]] / [../open_questions.md](../open_questions.md)
 - [[Next Steps]] / [../next_steps.md](../next_steps.md)
-

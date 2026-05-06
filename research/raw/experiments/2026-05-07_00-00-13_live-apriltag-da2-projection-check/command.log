@@ -1,0 +1,17 @@
+$ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_ws/install/setup.bash\ \&\&\ timeout\ 40s\ python3\ /home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_apriltag_projection_check.py\ --frames\ 40\ --min-tags\ 4\ --output-csv\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_apriltag_projection_check.csv\ --summary-json\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_apriltag_projection_check_summary.json\ --debug-png\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_apriltag_projection_check.png 
+
+[INFO] [1778079614.747187934] [live_apriltag_projection_check]: Projection check family=tag16h5, tag_size=0.088m, cam_offset=[0.1, 0.0, 0.15], cam_roll=3.97deg
+[INFO] [1778079615.134669494] [live_apriltag_projection_check]: frame=1 tags=4 rms=0.181px pose_z=3.246m exp_x=3.346m da2_x=2.177m x_ratio=0.651 dx=-1.169m
+[INFO] [1778079615.328843244] [live_apriltag_projection_check]: frame=2 tags=5 rms=0.111px pose_z=3.208m exp_x=3.308m da2_x=2.000m x_ratio=0.605 dx=-1.307m
+[INFO] [1778079615.549945681] [live_apriltag_projection_check]: frame=3 tags=6 rms=0.164px pose_z=3.203m exp_x=3.303m da2_x=2.123m x_ratio=0.643 dx=-1.180m
+[INFO] [1778079616.659305902] [live_apriltag_projection_check]: frame=8 tags=8 rms=0.116px pose_z=3.240m exp_x=3.340m da2_x=1.958m x_ratio=0.586 dx=-1.381m
+[INFO] [1778079617.814543673] [live_apriltag_projection_check]: frame=13 tags=4 rms=0.146px pose_z=3.246m exp_x=3.346m da2_x=2.096m x_ratio=0.626 dx=-1.251m
+[INFO] [1778079618.974629208] [live_apriltag_projection_check]: frame=15 tags=4 rms=0.142px pose_z=3.051m exp_x=3.151m da2_x=2.011m x_ratio=0.638 dx=-1.140m
+[INFO] [1778079620.170670231] [live_apriltag_projection_check]: not enough projected tags: 3
+[INFO] [1778079621.451816828] [live_apriltag_projection_check]: not enough projected tags: 3
+[INFO] [1778079622.667293310] [live_apriltag_projection_check]: frame=24 tags=5 rms=0.121px pose_z=3.276m exp_x=3.376m da2_x=1.874m x_ratio=0.555 dx=-1.502m
+[INFO] [1778079623.806210526] [live_apriltag_projection_check]: frame=29 tags=5 rms=0.093px pose_z=3.214m exp_x=3.314m da2_x=2.110m x_ratio=0.637 dx=-1.204m
+[INFO] [1778079624.961125494] [live_apriltag_projection_check]: frame=32 tags=6 rms=0.117px pose_z=3.281m exp_x=3.381m da2_x=1.816m x_ratio=0.537 dx=-1.565m
+[INFO] [1778079625.983055774] [live_apriltag_projection_check]: frame=37 tags=6 rms=0.186px pose_z=3.032m exp_x=3.132m da2_x=1.769m x_ratio=0.565 dx=-1.363m
+[INFO] [1778079626.689788115] [live_apriltag_projection_check]: FINAL samples=40 rms=0.144px pose_z=3.235m exp_x=3.335m da2_x=2.019m x_ratio=0.6105 dx=-1.308m
+[INFO] [1778079626.690370226] [live_apriltag_projection_check]: Saved CSV: /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_apriltag_projection_check.csv

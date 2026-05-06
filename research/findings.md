@@ -67,3 +67,13 @@ Current status:
   `DA2/pose_z ~= 1.032x` with nominal local scale `0.969`. This is the strongest
   live board measurement so far and weakens the case for applying a large fixed
   DA2 depth scale correction.
+- A farther-distance repeat collected 12 samples with acceptable RMS
+  (`~0.148 px`) and produced `pose_z ~= 3.229 m`, `DA2 ~= 1.857 m`, or
+  `DA2/pose_z ~= 0.584x` with nominal local scale `1.712`. This tentative point
+  supports distance-dependent behavior and further weakens a single global DA2
+  scale correction.
+- The discrepancy between shorter DA2 board depth and larger-looking DA2 maps
+  should be treated as a pipeline-stage problem, not a contradiction. The likely
+  causes to separate are point-depth bias, ray/extrinsic projection, height
+  filtering, BEV grid metadata, global map accumulation/pose, and LiDAR
+  reference mismatch.
