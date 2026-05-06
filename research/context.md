@@ -6,10 +6,10 @@ Current background is `needs verification`. Add the broader domain, prior assump
 
 ## Problem Definition
 
-- **Problem:** `needs verification`
-- **Why it matters:** `needs verification`
+- **Problem:** Define loss formulations that optimize the whole STELLA Camera-Nav pipeline, not only pixel-level monocular depth error.
+- **Why it matters:** The robot uses predicted depth only as an intermediate representation; navigation quality depends on BEV free-space, obstacle endpoints, map consistency, localization stability, and planner safety.
 - **Target setting:** SSH-server-based experiments and accumulated research records.
-- **Expected output:** a research wiki that can support paper or report writing.
+- **Expected output:** loss formulations, ablation plans, and experiment records that can support paper or report writing.
 
 ## Research Scope
 
@@ -26,15 +26,17 @@ Current background is `needs verification`. Add the broader domain, prior assump
 
 ## Current Narrative
 
-Write this section as a draftable research narrative. It should eventually become material for Introduction and Discussion.
+STELLA Camera-Nav is a camera-based indoor navigation system where monocular metric depth is converted into ego-centric BEV occupancy, accumulated into a global map, matched against a map for localization, and consumed by Nav2. A depth loss that improves benchmark depth metrics may not improve navigation if it fails to preserve obstacle endpoints, free-space visibility, occlusion semantics, or temporal map stability. The research direction is therefore to formulate navigation-aware losses over the whole pipeline and test whether these losses correlate with downstream BEV, localization, and Nav2 metrics.
 
 ## Key Assumptions
 
-- `needs verification`: List assumptions that experiments or literature should test.
+- **Assumption, tentative:** LiDAR-derived ray endpoint and free-space supervision are closer to navigation success than dense pixel depth loss alone.
+- **Assumption, tentative:** Differentiable soft BEV/raycasting losses can improve the runtime hard BEV occupancy output despite surrogate mismatch.
+- **Assumption, tentative:** Localization likelihood-field and planning/costmap metrics should be used first for checkpoint selection and ablation, then only later as training surrogates if needed.
 
 ## Links
 
 - [[Hypotheses]] / [hypotheses.md](hypotheses.md)
 - [[Findings]] / [findings.md](findings.md)
 - [[Paper Outline]] / [paper_outline.md](paper_outline.md)
-
+- [[Navigation-Aware Loss Formulation]] / [concepts/navigation_aware_loss_formulation.md](concepts/navigation_aware_loss_formulation.md)

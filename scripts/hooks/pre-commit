@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -u
+
+# Research-vault guardrail. This hook keeps experiment notes structurally
+# complete so results remain interpretable in future sessions.
+
+required_sections=(
+  "## Recording Contract"
+  "## Motivation"
+  "## Research Question"
+  "## Hypothesis"
+  "## Setup"
+  "## Command / Config"
+  "## Variables"
+  "## Dataset / Split"
+  "## Metrics"
+  "## Results"
+  "## Interpretation"
+  "## Finding Updates"
+  "## Failure Notes"
+  "## Follow-up"
+)
+
+status=0
+
+section_has_content() {
+  path="$1"
+  section="$2"
+  awk -v section="$section" '
+    $0 == section { in_section = 1; next }
+    in_section && /^## / { exit }
+    in_section { print }
+  ' "$path" | grep -Eiv '^[[:space:]]*$|needs verification|^TBD$|^[[:space:]]*-[[:space:]]*(needs verification|TBD)' >/dev/null
+}
+
+while IFS= read -r path; do
+  case "$path" in
+    research/experiments/*.md)
+      [ "$(basename "$path")" = "TEMPLATE.md" ] && continue
+      for section in "${required_sections[@]}"; do
+        if ! grep -Fqx "$section" "$path"; then
+          printf "pre-commit: %s missing required section: %s\n" "$path" "$section" >&2
+          status=1
+        fi
+      done
+      for section in "## Motivation" "## Research Question" "## Hypothesis" "## Metrics" "## Interpretation" "## Follow-up"; do
+        if ! section_has_content "$path" "$section"; then
+          printf "pre-commit: %s section must contain non-placeholder content: %s\n" "$path" "$section" >&2
+          status=1
+        fi
+      done
+      ;;
+  esac
+done < <(git diff --cached --name-only --diff-filter=ACM)
+
+if [ "$status" -ne 0 ]; then
+  printf "\nCommit blocked: experiment notes must include non-placeholder motivation, setup, metrics, results, interpretation, and follow-up.\n" >&2
+fi
+
+exit "$status"

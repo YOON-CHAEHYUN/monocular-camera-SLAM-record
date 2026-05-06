@@ -1,0 +1,40 @@
+$ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_ws/install/setup.bash\ \&\&\ timeout\ 25s\ python3\ /home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py\ --frames\ 30\ --min-tags\ 2\ --max-reproj-rms\ 6.0\ --output-csv\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_aprilgrid_depth_check_smoke.csv\ --summary-json\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_aprilgrid_depth_check_smoke_summary.json\ --debug-png\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_aprilgrid_depth_check_smoke.png 
+
+[INFO] [1778077035.345639599] [live_aprilgrid_depth_check]: AprilGrid family=tag36h11, tags=6x6, tag_size=0.0880m, spacing=0.0264m, board=0.660x0.660m
+[INFO] [1778077036.398471087] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077037.493591219] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077038.627924556] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077039.724152344] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077041.507258266] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077042.606333473] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077043.652489858] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077044.746219995] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077045.770223977] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077047.008199076] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077048.013197677] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077049.113043566] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077050.694908663] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077051.983749439] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077053.190381190] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077054.344197346] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077056.026503967] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077057.124655648] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[INFO] [1778077058.293231072] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=0 seen=[]
+[WARN] [1778077059.373703416] [live_aprilgrid_depth_check]: no valid AprilGrid samples collected
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+Traceback (most recent call last):
+  File "/home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py", line 413, in <module>
+    main()
+  File "/home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py", line 402, in main
+    rclpy.spin(node)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException

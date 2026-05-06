@@ -21,6 +21,35 @@ This directory is a Markdown vault for accumulating research context, experiment
 
 The vault should compile research understanding over time. New experiments and sources should update the relevant overview files, not just create isolated notes. Each important claim should remain traceable to evidence.
 
+## Mandatory Experiment Records
+
+Every substantive experiment, calibration run, bag replay, live hardware check,
+or model/metric comparison must leave a Markdown record in the same working
+turn. The record must explain why the test was run, what question or hypothesis
+it tests, how it was run, which data/config/hardware were used, which metrics
+were checked, what happened, whether the result is valid or tentative, how it
+should be interpreted, and the next action.
+
+Use the experiment harness when starting a new test:
+
+```bash
+EXP_MOTIVATION="why this test is being run" \
+EXP_QUESTION="question this test answers" \
+EXP_HYPOTHESIS="hypothesis under test" \
+EXP_METRICS="primary metrics / qualitative checks" \
+scripts/run_experiment.sh "Experiment title" -- <command> [args...]
+```
+
+Install the local guardrail hook once per clone with:
+
+```bash
+scripts/install_hooks.sh
+```
+
+## Active Concept Notes
+
+- [[Navigation-Aware Loss Formulation]] / [concepts/navigation_aware_loss_formulation.md](concepts/navigation_aware_loss_formulation.md): whole-pipeline loss formulation for STELLA Camera-Nav.
+
 When adding content, distinguish:
 
 - **Fact:** confirmed background or metadata.

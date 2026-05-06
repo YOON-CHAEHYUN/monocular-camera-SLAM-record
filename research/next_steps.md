@@ -4,14 +4,15 @@ This file tracks prioritized actions. Keep it practical and update it after expe
 
 ## Now
 
-- Define the initial research problem in [[Context]] / [context.md](context.md).
-- Add initial hypotheses in [[Hypotheses]] / [hypotheses.md](hypotheses.md).
-- Record the first experiment using [experiments/TEMPLATE.md](experiments/TEMPLATE.md).
+- Implement or sketch an offline dataset exporter from bag data for RGB, camera_info, odom/EKF, LiDAR scan, LiDAR BEV teacher, and per-ray teacher.
+- Create a PyTorch prototype for differentiable backprojection, soft BEV projection, and soft ray endpoint loss.
+- Run a baseline replay metric table for the current DA2 raw checkpoint using `per_frame_bev_lidar_eval.py`.
 
 ## Next
 
-- Ingest key related work into [[Sources]] / [sources.md](sources.md).
-- Convert early observations into evidence-linked findings in [[Findings]] / [findings.md](findings.md).
+- Run ablations in this order: depth-only, `L_depth + L_ray`, plus `L_free`, plus `L_occ`, then temporal/localization losses.
+- Add related work notes for occupancy mapping, likelihood-field localization, differentiable rendering/projection, and planning-aware perception.
+- Convert ablation results into evidence-linked findings in [[Findings]] / [findings.md](findings.md).
 
 ## Later
 
@@ -20,4 +21,3 @@ This file tracks prioritized actions. Keep it practical and update it after expe
 ## Completed
 
 Move completed actions here with dates and links to resulting notes.
-

@@ -12,6 +12,23 @@ Usage:
 Example:
   scripts/run_experiment.sh "ORB-SLAM3 monocular baseline" -- ros2 launch pkg launch.py
 
+Before running a test, set these required context variables:
+  EXP_MOTIVATION="why this test is being run"
+  EXP_QUESTION="question this test answers"
+  EXP_HYPOTHESIS="hypothesis under test"
+  EXP_METRICS="primary metrics / qualitative checks"
+
+Optional context variables:
+  EXP_CONFIG_PATH="important config file path or N/A"
+  EXP_CONFIG_VALUES="important config values"
+  EXP_DATASET="bag/dataset/live hardware source"
+  EXP_CAVEATS="known caveats"
+  EXP_INTERPRETATION="initial interpretation after the run"
+  EXP_NEXT_ACTION="next action after reviewing result"
+
+For emergency exploratory runs only, set EXP_ALLOW_INCOMPLETE=1. The generated
+note must still be completed before reporting results.
+
 The command runs from the directory where this script was invoked.
 It creates:
   - research/experiments/YYYY-MM-DD_HH-MM-SS_<slug>.md
@@ -41,6 +58,35 @@ fi
 
 COMMAND=("$@")
 COMMAND_TEXT="$(printf "%q " "${COMMAND[@]}")"
+
+required_context=(EXP_MOTIVATION EXP_QUESTION EXP_HYPOTHESIS EXP_METRICS)
+missing_context=()
+for name in "${required_context[@]}"; do
+  if [ -z "${!name:-}" ]; then
+    missing_context+=("$name")
+  fi
+done
+
+if [ "${#missing_context[@]}" -gt 0 ] && [ "${EXP_ALLOW_INCOMPLETE:-0}" != "1" ]; then
+  printf "Missing required experiment context:\n" >&2
+  for name in "${missing_context[@]}"; do
+    printf "  - %s\n" "$name" >&2
+  done
+  printf "\nSet these variables so the experiment record captures why the test is being run.\n" >&2
+  printf "Use EXP_ALLOW_INCOMPLETE=1 only for emergency exploratory runs, then complete the note before reporting results.\n" >&2
+  exit 2
+fi
+
+MOTIVATION="${EXP_MOTIVATION:-needs verification: add why this experiment was run and what research gap it addresses.}"
+QUESTION="${EXP_QUESTION:-needs verification: add the question this experiment was intended to answer.}"
+HYPOTHESIS="${EXP_HYPOTHESIS:-needs verification: link the tested hypothesis and expected support/weaken/reject outcomes.}"
+METRICS="${EXP_METRICS:-needs verification: add primary metrics and qualitative checks.}"
+CONFIG_PATH="${EXP_CONFIG_PATH:-needs verification}"
+CONFIG_VALUES="${EXP_CONFIG_VALUES:-needs verification}"
+DATASET="${EXP_DATASET:-needs verification}"
+CAVEATS="${EXP_CAVEATS:-needs verification}"
+INITIAL_INTERPRETATION="${EXP_INTERPRETATION:-needs verification}"
+NEXT_ACTION="${EXP_NEXT_ACTION:-Review this note and replace all needs-verification fields that affect interpretation.}"
 
 DATE="$(date +%Y-%m-%d)"
 STAMP="$(date +%Y-%m-%d_%H-%M-%S)"
@@ -88,17 +134,31 @@ $TITLE
 
 $([ "$EXIT_CODE" -eq 0 ] && printf "completed" || printf "failed")
 
+## Recording Contract
+
+This experiment note is incomplete until it records all of the following:
+
+- why the experiment was run
+- the question or hypothesis it tests
+- exact setup, command, data source, and config values
+- metrics and qualitative checks
+- observed results and artifact paths
+- interpretation, including valid/invalid/tentative/superseded status
+- next action
+
+Do not use the numeric result without this context.
+
 ## Motivation
 
-\`needs verification\`: Add why this experiment was run and what research gap it addresses.
+$MOTIVATION
 
 ## Research Question
 
-\`needs verification\`: Add the question this experiment was intended to answer.
+$QUESTION
 
 ## Hypothesis
 
-\`needs verification\`: Link the tested hypothesis from [[Hypotheses]] / [../hypotheses.md](../hypotheses.md).
+$HYPOTHESIS
 
 ## Setup
 
@@ -114,8 +174,8 @@ $([ "$EXIT_CODE" -eq 0 ] && printf "completed" || printf "failed")
 $COMMAND_TEXT
 \`\`\`
 
-- **Config path:** needs verification
-- **Important config values:** needs verification
+- **Config path:** $CONFIG_PATH
+- **Important config values:** $CONFIG_VALUES
 
 ## Variables
 
@@ -125,14 +185,14 @@ $COMMAND_TEXT
 
 ## Dataset / Split
 
-- **Dataset:** needs verification
+- **Dataset:** $DATASET
 - **Split:** needs verification
 - **Preprocessing:** needs verification
-- **Known caveats:** needs verification
+- **Known caveats:** $CAVEATS
 
 ## Metrics
 
-- **Primary metrics:** needs verification
+- **Primary metrics:** $METRICS
 - **Secondary metrics:** needs verification
 - **Qualitative checks:** needs verification
 
@@ -141,12 +201,14 @@ $COMMAND_TEXT
 - **Fact:** The command exited with code \`$EXIT_CODE\`.
 - **Observation:** Raw command output is saved at [command.log](../raw/experiments/$EXP_ID/command.log).
 - **Artifact paths:** [raw experiment directory](../raw/experiments/$EXP_ID/)
+- **Result validity:** needs verification: mark valid, invalid, tentative, or superseded.
 
 ## Interpretation
 
-- **Interpretation:** needs verification
+- **Interpretation:** $INITIAL_INTERPRETATION
 - **Speculation:** tentative
 - **Hypothesis update:** unresolved
+- **Reasoning:** needs verification: explain why the result should or should not affect calibration/navigation decisions.
 
 ## Finding Updates
 
@@ -158,7 +220,10 @@ $([ "$EXIT_CODE" -eq 0 ] && printf "No failure recorded by the runner. Review lo
 
 ## Follow-up
 
-- Ask Codex to ingest this experiment result into context, hypotheses, findings, open questions, next steps, and paper outline.
+- $NEXT_ACTION
+- Update [[Findings]] / [../findings.md](../findings.md) with a link to this note.
+- Update [[Open Questions]] / [../open_questions.md](../open_questions.md) and [[Next Steps]] / [../next_steps.md](../next_steps.md).
+- If the experiment produced invalid results, preserve the note and mark the invalidation reason.
 
 ## Links
 

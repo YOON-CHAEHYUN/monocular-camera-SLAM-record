@@ -4,6 +4,13 @@ This workspace is a research Markdown vault for accumulating experiment records,
 
 ## Core Workflow
 
+0. Mandatory experiment-recording rule: whenever Codex starts, runs, or analyzes
+   a substantive experiment, test, calibration run, bag replay, live hardware
+   check, or model/metric comparison, it must update Markdown research records
+   in the same turn. The record must include why the experiment was run, how it
+   was run, the setup/config/data source, metrics, results, validity status,
+   interpretation, and next action. Do not leave only chat text or raw numeric
+   outputs.
 1. Before editing research documents, first read the existing relevant files to understand the current research context. At minimum, check `research/README.md`, `research/context.md`, `research/hypotheses.md`, `research/findings.md`, `research/open_questions.md`, `research/next_steps.md`, and `research/paper_outline.md` when updating broad research state.
 2. When the user provides experiment results, logs, paper notes, code changes, or analysis results, update the relevant Markdown files directly. Do not only summarize in chat.
 3. Every substantive update must record more than a summary. Capture:
@@ -62,3 +69,11 @@ This workspace is a research Markdown vault for accumulating experiment records,
 - When starting a new test, use `scripts/run_experiment.sh "Experiment title" -- <command> [args...]`.
 - The runner creates a dated experiment note under `research/experiments/`, saves command output under `research/raw/experiments/`, and calls `scripts/auto_sync.sh`.
 - The generated experiment note is only a first-pass record. After the run, Codex should still review the note and logs, then update context, hypotheses, findings, open questions, next steps, and paper outline.
+- Before running the runner, set `EXP_MOTIVATION`, `EXP_QUESTION`,
+  `EXP_HYPOTHESIS`, and `EXP_METRICS`. The harness requires these by default so
+  the experiment note captures why the test exists before the command runs.
+  Use `EXP_ALLOW_INCOMPLETE=1` only for emergency exploratory runs, then fill
+  the note before presenting the experiment result.
+- Local git hooks can be installed with `scripts/install_hooks.sh`; the
+  pre-commit hook blocks experiment notes that are missing required sections or
+  leave core sections as placeholders.
