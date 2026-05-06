@@ -79,14 +79,36 @@ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_w
 - **Fact:** The command exited with code `0`.
 - **Observation:** Raw command output is saved at [command.log](../raw/experiments/2026-05-06_23-41-05_live-single-tag-da2-aligned-scale-improved-position/command.log).
 - **Artifact paths:** [raw experiment directory](../raw/experiments/2026-05-06_23-41-05_live-single-tag-da2-aligned-scale-improved-position/)
-- **Result validity:** needs verification: mark valid, invalid, tentative, or superseded.
+- **Observation:** 40 valid samples were collected.
+- **Observation:** Median tag count was `7`; p10-p90 was `6-9`.
+- **Observation:** Median single-tag reprojection RMS was `0.082 px`;
+  p10-p90 was `0.060-0.910 px`.
+- **Observation:** Median pose_z was `1.705 m`; p10-p90 was
+  `1.598-1.710 m`.
+- **Observation:** Median DA2 sampled depth was `1.729 m`.
+- **Observation:** Median `DA2/pose_z` was `1.032x`; p10-p90 was
+  `0.963-1.137x`.
+- **Observation:** Nominal local DA2 scale from pose_z was `0.969`.
+- **Artifact paths:**
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_improved.csv`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_improved_summary.json`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_improved.png`.
+- **Result validity:** valid as a board-position scale observation. Hardware
+  depth remains invalid/tentative because the sampled hardware value is not
+  physically consistent with RGB pose.
 
 ## Interpretation
 
-- **Interpretation:** pending review of improved-position DA2-aligned single-tag scale summary
+- **Interpretation:** The improved board position produced enough samples and
+  DA2 closely matched the single-tag geometric pose at this range. This is the
+  strongest live board result so far.
 - **Speculation:** tentative
-- **Hypothesis update:** unresolved
-- **Reasoning:** needs verification: explain why the result should or should not affect calibration/navigation decisions.
+- **Hypothesis update:** weakened for a large fixed DA2 scale correction. The
+  improved-position run supports little or no local scale correction around
+  `1.7 m`, while closer/poorer-framed board runs showed different ratios.
+- **Reasoning:** Because the pose RMS is low and sample count is sufficient, the
+  result is useful. The spread across previous board placements still argues
+  against directly applying a global DA2 scale without BEV/LiDAR validation.
 
 ## Finding Updates
 
@@ -94,11 +116,15 @@ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_w
 
 ## Failure Notes
 
-No failure recorded by the runner. Review logs for warnings.
+No hard failure. Some frames still had insufficient valid tags, but 40 accepted
+samples were collected.
 
 ## Follow-up
 
-- If sample count is sufficient, compare ratio against previous runs and decide whether to repeat at a planned distance or validate in BEV/LiDAR.
+- Treat this as the preferred live board measurement so far.
+- Before changing DA2 runtime scale, validate against BEV/LiDAR map alignment.
+- If another board check is run, place the board near this framing and vary only
+  distance deliberately.
 - Update [[Findings]] / [../findings.md](../findings.md) with a link to this note.
 - Update [[Open Questions]] / [../open_questions.md](../open_questions.md) and [[Next Steps]] / [../next_steps.md](../next_steps.md).
 - If the experiment produced invalid results, preserve the note and mark the invalidation reason.
@@ -110,4 +136,3 @@ No failure recorded by the runner. Review logs for warnings.
 - [[Findings]] / [../findings.md](../findings.md)
 - [[Open Questions]] / [../open_questions.md](../open_questions.md)
 - [[Next Steps]] / [../next_steps.md](../next_steps.md)
-

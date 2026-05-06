@@ -62,3 +62,8 @@ Current status:
   `DA2/pose_z ~= 1.334x` with nominal local scale `0.749`. The disagreement
   with the previous board pose strengthens the finding that a single global DA2
   scale is not defensible yet.
+- The improved-position board repeat collected 40 samples with low RMS
+  (`~0.082 px`) and produced `pose_z ~= 1.705 m`, `DA2 ~= 1.729 m`, or
+  `DA2/pose_z ~= 1.032x` with nominal local scale `0.969`. This is the strongest
+  live board measurement so far and weakens the case for applying a large fixed
+  DA2 depth scale correction.
