@@ -1,0 +1,53 @@
+$ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_ws/install/setup.bash\ \&\&\ timeout\ 40s\ python3\ /home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py\ --family\ tag16h5\ --max-hamming\ 2\ --preprocess\ clahe\ --frames\ 40\ --min-tags\ 6\ --max-reproj-rms\ 6.0\ --output-csv\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_aprilgrid_tag16h5_scale.csv\ --summary-json\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_aprilgrid_tag16h5_scale_summary.json\ --debug-png\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_aprilgrid_tag16h5_scale.png 
+
+[INFO] [1778077321.475146705] [live_aprilgrid_depth_check]: AprilGrid family=tag16h5, tags=6x6, tag_size=0.0880m, spacing=0.0264m, board=0.660x0.660m
+[INFO] [1778077322.462619579] [live_aprilgrid_depth_check]: reject high reprojection RMS: 142.11px
+[INFO] [1778077323.669931608] [live_aprilgrid_depth_check]: reject high reprojection RMS: 29786.66px
+[INFO] [1778077324.748590628] [live_aprilgrid_depth_check]: reject high reprojection RMS: 74724.10px
+[INFO] [1778077325.900044783] [live_aprilgrid_depth_check]: reject high reprojection RMS: 240.44px
+[INFO] [1778077327.036268839] [live_aprilgrid_depth_check]: reject high reprojection RMS: 42846.59px
+[INFO] [1778077328.226765919] [live_aprilgrid_depth_check]: reject high reprojection RMS: 36061244.07px
+[INFO] [1778077329.286161446] [live_aprilgrid_depth_check]: reject high reprojection RMS: 55766092.41px
+[INFO] [1778077330.406593341] [live_aprilgrid_depth_check]: reject high reprojection RMS: 149844948.43px
+[INFO] [1778077331.533072376] [live_aprilgrid_depth_check]: reject high reprojection RMS: 435701.17px
+[INFO] [1778077332.725297546] [live_aprilgrid_depth_check]: reject high reprojection RMS: 3902512596.14px
+[INFO] [1778077333.843178535] [live_aprilgrid_depth_check]: reject high reprojection RMS: 12747382748911058944.00px
+[INFO] [1778077334.944201148] [live_aprilgrid_depth_check]: reject high reprojection RMS: 4363.92px
+[INFO] [1778077336.042763922] [live_aprilgrid_depth_check]: reject high reprojection RMS: 127.98px
+[INFO] [1778077337.120142384] [live_aprilgrid_depth_check]: reject high reprojection RMS: 165.49px
+[INFO] [1778077338.183330911] [live_aprilgrid_depth_check]: reject high reprojection RMS: 137.86px
+[INFO] [1778077339.305191772] [live_aprilgrid_depth_check]: reject high reprojection RMS: 19170.37px
+[INFO] [1778077340.400856835] [live_aprilgrid_depth_check]: reject high reprojection RMS: 115.16px
+[INFO] [1778077341.992044622] [live_aprilgrid_depth_check]: reject high reprojection RMS: 309.75px
+[INFO] [1778077343.075982217] [live_aprilgrid_depth_check]: reject high reprojection RMS: 1893.89px
+[INFO] [1778077344.267527836] [live_aprilgrid_depth_check]: reject high reprojection RMS: 4302435.71px
+[INFO] [1778077345.346591352] [live_aprilgrid_depth_check]: reject high reprojection RMS: 18581.72px
+[INFO] [1778077346.532897623] [live_aprilgrid_depth_check]: reject high reprojection RMS: 834114326.49px
+[INFO] [1778077347.708617354] [live_aprilgrid_depth_check]: reject high reprojection RMS: 2322.89px
+[INFO] [1778077348.911037705] [live_aprilgrid_depth_check]: reject high reprojection RMS: 1303323223.06px
+[INFO] [1778077349.948389989] [live_aprilgrid_depth_check]: reject high reprojection RMS: 9616.72px
+[INFO] [1778077351.111213483] [live_aprilgrid_depth_check]: reject high reprojection RMS: 187.81px
+[INFO] [1778077352.402578252] [live_aprilgrid_depth_check]: reject high reprojection RMS: 433.40px
+[INFO] [1778077353.834903110] [live_aprilgrid_depth_check]: reject high reprojection RMS: 16551891.90px
+[INFO] [1778077356.560162880] [live_aprilgrid_depth_check]: reject high reprojection RMS: 3200521.22px
+[INFO] [1778077357.696263908] [live_aprilgrid_depth_check]: reject high reprojection RMS: 10991.14px
+[INFO] [1778077358.762136199] [live_aprilgrid_depth_check]: reject high reprojection RMS: 5296379803.42px
+[INFO] [1778077359.922528312] [live_aprilgrid_depth_check]: reject high reprojection RMS: 266.21px
+[WARN] [1778077360.531274988] [live_aprilgrid_depth_check]: no valid AprilGrid samples collected
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+Traceback (most recent call last):
+  File "/home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py", line 441, in <module>
+    main()
+  File "/home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py", line 429, in main
+    rclpy.spin_once(node, timeout_sec=0.2)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 208, in spin_once
+    executor.spin_once(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 653, in _wait_for_ready_callbacks
+    wait_set = _rclpy.WaitSet(
+rclpy._rclpy_pybind11.RCLError: failed to initialize wait set: the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/wait.c:130
