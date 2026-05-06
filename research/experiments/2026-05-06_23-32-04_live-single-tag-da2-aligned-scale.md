@@ -79,14 +79,35 @@ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_w
 - **Fact:** The command exited with code `0`.
 - **Observation:** Raw command output is saved at [command.log](../raw/experiments/2026-05-06_23-32-04_live-single-tag-da2-aligned-scale/command.log).
 - **Artifact paths:** [raw experiment directory](../raw/experiments/2026-05-06_23-32-04_live-single-tag-da2-aligned-scale/)
-- **Result validity:** needs verification: mark valid, invalid, tentative, or superseded.
+- **Observation:** 40 valid frames were collected.
+- **Observation:** Median single-tag reprojection RMS was `0.075 px`.
+- **Observation:** Median pose_z was `1.143 m`.
+- **Observation:** DA2 sampled median was `0.839 m` after rotating the DA2 mask
+  to match `/da2/depth_raw`.
+- **Observation:** Median `DA2/pose_z` was `0.734x`, implying nominal local DA2
+  scale `1.36`.
+- **Observation:** Hardware-depth sampled median was `0.312 m`, still
+  inconsistent with the RGB pose.
+- **Artifact paths:**
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale.csv`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_summary.json`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale.png`.
+- **Result validity:** pose valid; DA2 scale tentative; hardware-depth ROI
+  invalid or unresolved.
 
 ## Interpretation
 
-- **Interpretation:** pending review of DA2-aligned single-tag scale summary
+- **Interpretation:** Rotating the DA2 sampling mask fixed the prior wrong-ROI
+  failure. At this board position, DA2 is shorter than the geometric pose
+  distance (`0.839 m` vs `1.143 m`), implying a local scale around `1.36`.
 - **Speculation:** tentative
 - **Hypothesis update:** unresolved
-- **Reasoning:** needs verification: explain why the result should or should not affect calibration/navigation decisions.
+- **Reasoning:** The pose estimate has very low reprojection RMS and stable
+  pose_z, so the RGB geometry is usable. The DA2 value is now sampled from the
+  rotated DA2 coordinate system. However, the result conflicts with previous
+  hardware-depth and LiDAR-derived checks, so it should not be applied as a
+  global correction until repeated at another board distance and validated in
+  BEV/LiDAR map space.
 
 ## Finding Updates
 
@@ -98,7 +119,10 @@ No failure recorded by the runner. Review logs for warnings.
 
 ## Follow-up
 
-- If valid, repeat at a second board distance and compare against BEV/LiDAR scale before changing DA2 params.
+- Repeat at a second board distance before changing DA2 params.
+- Verify hardware-depth color alignment separately; current hardware ROI values
+  are not physically consistent with the RGB pose.
+- Compare any accepted single-tag scale candidate against BEV/LiDAR map scale.
 - Update [[Findings]] / [../findings.md](../findings.md) with a link to this note.
 - Update [[Open Questions]] / [../open_questions.md](../open_questions.md) and [[Next Steps]] / [../next_steps.md](../next_steps.md).
 - If the experiment produced invalid results, preserve the note and mark the invalidation reason.
@@ -110,4 +134,3 @@ No failure recorded by the runner. Review logs for warnings.
 - [[Findings]] / [../findings.md](../findings.md)
 - [[Open Questions]] / [../open_questions.md](../open_questions.md)
 - [[Next Steps]] / [../next_steps.md](../next_steps.md)
-

@@ -1,0 +1,60 @@
+$ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_ws/install/setup.bash\ \&\&\ timeout\ 40s\ python3\ /home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py\ --family\ tag16h5\ --layout\ single_tags\ --max-hamming\ 2\ --preprocess\ clahe\ --margin-min\ 20\ --frames\ 40\ --min-tags\ 6\ --max-single-tag-reproj-rms\ 4.0\ --rotate-da2-mask\ --output-csv\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_repeat.csv\ --summary-json\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_repeat_summary.json\ --debug-png\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_repeat.png 
+
+[INFO] [1778078116.191482518] [live_aprilgrid_depth_check]: AprilGrid family=tag16h5, tags=6x6, tag_size=0.0880m, spacing=0.0264m, board=0.660x0.660m
+[INFO] [1778078117.945398930] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[6, 9, 15, 25, 26, 29]
+[INFO] [1778078119.106762927] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[6, 9, 15, 25, 26, 27, 28]
+[INFO] [1778078120.254359531] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[1, 9, 15, 25, 26]
+[INFO] [1778078121.883617010] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[6, 9, 13, 25]
+[INFO] [1778078123.066403854] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[6, 9, 16, 25, 26, 29]
+[INFO] [1778078124.186187056] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[1, 6, 9, 12, 17, 18, 19, 25]
+[INFO] [1778078125.338391320] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=5 seen=[0, 2, 6, 9, 11, 12, 15, 18, 25, 26, 27, 28]
+[INFO] [1778078126.380411064] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[4, 6, 9, 14, 15, 25, 26]
+[INFO] [1778078127.489875490] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[5, 9, 12, 22, 24, 25, 26]
+[INFO] [1778078128.491246447] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[9, 16, 17, 18, 20, 25, 29]
+[INFO] [1778078129.600182823] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[0, 2, 6, 9, 12, 14, 20, 22, 25, 26]
+[INFO] [1778078130.645351321] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[4, 6, 9, 25, 26]
+[INFO] [1778078132.009812193] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[6, 9, 12, 13, 14, 21, 25]
+[INFO] [1778078133.333235264] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[6, 8, 9, 12, 20, 22, 25]
+[INFO] [1778078134.664088257] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[4, 6, 9, 16, 22, 25, 26, 28]
+[INFO] [1778078135.691855087] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[6, 9, 12, 20, 25]
+[INFO] [1778078136.795137146] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[6, 9, 15, 16, 18, 20, 25, 26]
+[INFO] [1778078137.427215501] [live_aprilgrid_depth_check]: frame=1 tags=6 rms=0.10px layout=single_tags pose_z=0.700m pose_norm=0.750m da2=0.948m da2/pose_z=1.353 hw=0.310m hw/pose_z=0.443
+[INFO] [1778078138.735485007] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[6, 10, 18, 25]
+[INFO] [1778078139.926839126] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[6, 9, 14, 18, 20, 25]
+[INFO] [1778078141.868700326] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[5, 6, 7, 9, 12, 13, 16, 25, 29]
+[INFO] [1778078143.009704144] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=5 seen=[6, 9, 10, 15, 22, 25, 26, 29]
+[INFO] [1778078144.215084979] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=5 seen=[6, 7, 8, 9, 12, 14, 25, 26]
+[INFO] [1778078145.751001550] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[6, 9, 10, 25]
+[INFO] [1778078146.900727931] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=5 seen=[1, 6, 9, 18, 21, 25]
+[INFO] [1778078147.914568208] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[4, 5, 6, 8, 9, 16, 25, 26]
+[INFO] [1778078149.067695847] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=5 seen=[0, 2, 6, 8, 9, 13, 18, 20, 25]
+[INFO] [1778078149.474140082] [live_aprilgrid_depth_check]: frame=2 tags=6 rms=0.07px layout=single_tags pose_z=0.701m pose_norm=0.751m da2=0.930m da2/pose_z=1.326 hw=0.310m hw/pose_z=0.442
+[INFO] [1778078150.496878084] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[8, 9, 25]
+[INFO] [1778078150.764546431] [live_aprilgrid_depth_check]: frame=3 tags=6 rms=0.07px layout=single_tags pose_z=0.701m pose_norm=0.732m da2=0.935m da2/pose_z=1.334 hw=0.314m hw/pose_z=0.448
+[INFO] [1778078151.870194801] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=4 seen=[6, 8, 9, 10, 12, 15, 20, 25]
+[INFO] [1778078152.923606038] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=5 seen=[1, 5, 6, 7, 9, 10, 13, 15, 25]
+[INFO] [1778078154.219496313] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=3 seen=[6, 9, 12, 18, 22, 24, 25, 26, 29]
+[INFO] [1778078155.264895179] [live_aprilgrid_depth_check]: FINAL samples=3 pose_z_med=0.701m rms_med=0.07px DA2/pose_z=1.3344 DA2 scale=0.7494
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[INFO] [1778078155.266181930] [live_aprilgrid_depth_check]: FINAL HW/pose_z=0.4426 HW scale=2.2593
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[INFO] [1778078155.267371660] [live_aprilgrid_depth_check]: Saved CSV: /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_repeat.csv
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[INFO] [1778078155.268516942] [live_aprilgrid_depth_check]: Saved summary: /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_da2_aligned_scale_repeat_summary.json
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+Traceback (most recent call last):
+  File "/home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py", line 656, in <module>
+    main()
+  File "/home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py", line 644, in main
+    rclpy.spin_once(node, timeout_sec=0.2)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 208, in spin_once
+    executor.spin_once(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException

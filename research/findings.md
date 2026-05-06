@@ -52,3 +52,8 @@ Current status:
   are invalid as scale estimates until ROI alignment is fixed. DA2 depth is
   published after a 180-degree image rotation, while the current checker sampled
   it with an unrotated RGB mask.
+- After rotating the DA2 sampling mask to match `/da2/depth_raw`, single-tag
+  pose remained stable (`RMS ~= 0.075 px`, `pose_z ~= 1.143 m`) and DA2 sampled
+  median became `0.839 m`, or `DA2/pose_z ~= 0.734x` with nominal local scale
+  `1.36`. This is tentative and must be repeated at another distance before
+  changing runtime DA2 parameters.
