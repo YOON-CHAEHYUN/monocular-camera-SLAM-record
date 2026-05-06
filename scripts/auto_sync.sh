@@ -24,7 +24,7 @@ if [ -z "$(git status --porcelain)" ]; then
   exit 0
 fi
 
-git add AGENTS.md research .gitignore scripts/auto_sync.sh >> "$LOG_FILE" 2>&1
+git add AGENTS.md research .gitignore scripts >> "$LOG_FILE" 2>&1
 
 if git diff --cached --quiet; then
   log "no staged changes after add"

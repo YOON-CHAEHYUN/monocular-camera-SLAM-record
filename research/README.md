@@ -42,3 +42,11 @@ This repository includes `scripts/auto_sync.sh`, which can periodically commit v
 
 Auto-sync log file: `.auto-sync.log`
 
+For experiment-triggered updates, use:
+
+```bash
+cd ~/colcon_ws/research-wiki
+scripts/run_experiment.sh "Experiment title" -- <command> [args...]
+```
+
+This creates a dated experiment note and saves the raw command output before committing the vault changes.

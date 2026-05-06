@@ -56,3 +56,9 @@ This workspace is a research Markdown vault for accumulating experiment records,
 - The script writes operational logs to `.auto-sync.log`, which is intentionally ignored by Git.
 - Do not rely on auto-sync as a substitute for careful research updates. Codex must still update the correct Markdown files with evidence links and clear fact/observation/interpretation/speculation separation.
 
+## Experiment Runner
+
+- Prefer event-based updates over time-based cron updates.
+- When starting a new test, use `scripts/run_experiment.sh "Experiment title" -- <command> [args...]`.
+- The runner creates a dated experiment note under `research/experiments/`, saves command output under `research/raw/experiments/`, and calls `scripts/auto_sync.sh`.
+- The generated experiment note is only a first-pass record. After the run, Codex should still review the note and logs, then update context, hypotheses, findings, open questions, next steps, and paper outline.
