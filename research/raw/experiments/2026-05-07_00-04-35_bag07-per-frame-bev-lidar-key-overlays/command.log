@@ -1,0 +1,82 @@
+$ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_ws/install/setup.bash\ \&\&\ python3\ /home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/fit_bev_scale_bag.py\ --bag\ /home/jetson/colcon_ws/bags/test_run_07/test_run_07_0.db3\ --out\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/bag07_per_frame_bev_lidar_20260507\ --frames\ 24\ --scale-min\ 0.70\ --scale-max\ 1.20\ --scale-step\ 0.025\ --viz-scales\ 0.75\,1.0\ --viz-frame-count\ 6 
+
+/home/jetson/.local/lib/python3.10/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+xFormers not available
+xFormers not available
+[depth] no hardware depth topic in this bag; HW depth comparison will be marked unavailable
+[1/4] selected 24 image/scan pairs from /home/jetson/colcon_ws/bags/test_run_07/test_run_07_0.db3
+[2/4] loading DA2 model
+[3/4] running DA2 and sweeping scales
+  frame 01/24 dt=36.7ms
+  frame 02/24 dt=5.4ms
+  frame 03/24 dt=39.3ms
+  frame 04/24 dt=22.1ms
+  frame 05/24 dt=19.4ms
+  frame 06/24 dt=33.8ms
+  frame 07/24 dt=32.9ms
+  frame 08/24 dt=29.7ms
+  frame 09/24 dt=10.6ms
+  frame 10/24 dt=43.2ms
+  frame 11/24 dt=10.9ms
+  frame 12/24 dt=22.4ms
+  frame 13/24 dt=6.3ms
+  frame 14/24 dt=34.0ms
+  frame 15/24 dt=27.9ms
+  frame 16/24 dt=5.4ms
+  frame 17/24 dt=41.8ms
+  frame 18/24 dt=9.8ms
+  frame 19/24 dt=44.9ms
+  frame 20/24 dt=3.0ms
+  frame 21/24 dt=21.4ms
+  frame 22/24 dt=31.0ms
+  frame 23/24 dt=10.4ms
+  frame 24/24 dt=17.9ms
+[4/4] writing results
+{
+  "bag": "/home/jetson/colcon_ws/bags/test_run_07/test_run_07_0.db3",
+  "frames": 24,
+  "best_by_mean_f1_20": {
+    "scale": 0.75,
+    "mean_f1_20": 0.30189848457477947,
+    "mean_iou_occ": 0.05672330653149067,
+    "mean_prec_20": 0.36467664395946725,
+    "mean_rec_20": 0.4010478272450228,
+    "median_bev_lidar_ratio": 1.0445845127105713,
+    "n_ray_pairs": 664
+  },
+  "best_by_mean_iou_occ": {
+    "scale": 0.75,
+    "mean_f1_20": 0.30189848457477947,
+    "mean_iou_occ": 0.05672330653149067,
+    "mean_prec_20": 0.36467664395946725,
+    "mean_rec_20": 0.4010478272450228,
+    "median_bev_lidar_ratio": 1.0445845127105713,
+    "n_ray_pairs": 664
+  },
+  "recommended_by_bev_lidar_radial_ratio": {
+    "scale": 0.75,
+    "mean_f1_20": 0.30189848457477947,
+    "mean_iou_occ": 0.05672330653149067,
+    "mean_prec_20": 0.36467664395946725,
+    "mean_rec_20": 0.4010478272450228,
+    "median_bev_lidar_ratio": 1.0445845127105713,
+    "n_ray_pairs": 664
+  },
+  "raw_depth_summary": {
+    "median_da2_raw_over_lidar": 1.6665185689926147,
+    "mean_da2_raw_over_lidar": 1.5825949907302856,
+    "suggested_scale_from_raw_median": 0.6000533199005906,
+    "linear_fit_lidar_eq_a_da2_plus_b": [
+      0.08918599723972608,
+      3.071035696466682
+    ],
+    "n_pairs": 1104
+  },
+  "hardware_depth_summary_0_2p5m": {
+    "available": false,
+    "reason": "no hardware depth topic in bag"
+  },
+  "scale_formula": "corrected_depth = scale * raw_depth",
+  "elapsed_sec": 21.77253419599583
+}
