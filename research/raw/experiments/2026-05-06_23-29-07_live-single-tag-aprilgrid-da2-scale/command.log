@@ -1,0 +1,19 @@
+$ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_ws/install/setup.bash\ \&\&\ timeout\ 40s\ python3\ /home/jetson/colcon_ws/stella_camera_nav_experiments/scripts/live_aprilgrid_depth_check.py\ --family\ tag16h5\ --layout\ single_tags\ --max-hamming\ 2\ --preprocess\ clahe\ --margin-min\ 20\ --frames\ 40\ --min-tags\ 6\ --max-single-tag-reproj-rms\ 4.0\ --output-csv\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_aprilgrid_scale.csv\ --summary-json\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_aprilgrid_scale_summary.json\ --debug-png\ /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_aprilgrid_scale.png 
+
+[INFO] [1778077749.232417067] [live_aprilgrid_depth_check]: AprilGrid family=tag16h5, tags=6x6, tag_size=0.0880m, spacing=0.0264m, board=0.660x0.660m
+[INFO] [1778077749.388660998] [live_aprilgrid_depth_check]: frame=1 tags=10 rms=0.09px layout=single_tags pose_z=1.135m pose_norm=1.197m da2=4.233m da2/pose_z=3.731 hw=0.421m hw/pose_z=0.371
+[INFO] [1778077749.566345117] [live_aprilgrid_depth_check]: frame=2 tags=9 rms=0.15px layout=single_tags pose_z=1.137m pose_norm=1.198m da2=5.004m da2/pose_z=4.401 hw=0.311m hw/pose_z=0.274
+[INFO] [1778077749.787388252] [live_aprilgrid_depth_check]: frame=3 tags=7 rms=0.09px layout=single_tags pose_z=1.139m pose_norm=1.198m da2=5.182m da2/pose_z=4.552 hw=0.311m hw/pose_z=0.273
+[INFO] [1778077750.909636003] [live_aprilgrid_depth_check]: frame=6 tags=7 rms=0.11px layout=single_tags pose_z=1.137m pose_norm=1.210m da2=5.482m da2/pose_z=4.820 hw=0.321m hw/pose_z=0.282
+[INFO] [1778077751.998406821] [live_aprilgrid_depth_check]: frame=9 tags=7 rms=0.07px layout=single_tags pose_z=1.145m pose_norm=1.212m da2=5.542m da2/pose_z=4.842 hw=0.311m hw/pose_z=0.272
+[INFO] [1778077753.146249342] [live_aprilgrid_depth_check]: frame=14 tags=7 rms=0.07px layout=single_tags pose_z=1.145m pose_norm=1.213m da2=4.972m da2/pose_z=4.342 hw=0.418m hw/pose_z=0.365
+[INFO] [1778077754.274516301] [live_aprilgrid_depth_check]: frame=19 tags=7 rms=0.09px layout=single_tags pose_z=1.144m pose_norm=1.212m da2=5.199m da2/pose_z=4.544 hw=0.419m hw/pose_z=0.366
+[INFO] [1778077755.406884339] [live_aprilgrid_depth_check]: frame=23 tags=6 rms=0.06px layout=single_tags pose_z=1.152m pose_norm=1.212m da2=5.203m da2/pose_z=4.518 hw=0.416m hw/pose_z=0.361
+[INFO] [1778077756.490492924] [live_aprilgrid_depth_check]: not enough AprilGrid tags: valid=5 seen=[2, 6, 9, 10, 12, 14, 15, 18, 25, 26, 27]
+[INFO] [1778077757.598689007] [live_aprilgrid_depth_check]: frame=32 tags=6 rms=0.06px layout=single_tags pose_z=1.153m pose_norm=1.212m da2=5.027m da2/pose_z=4.362 hw=0.416m hw/pose_z=0.361
+[INFO] [1778077759.028204954] [live_aprilgrid_depth_check]: frame=36 tags=8 rms=0.08px layout=single_tags pose_z=1.141m pose_norm=1.204m da2=5.614m da2/pose_z=4.920 hw=0.311m hw/pose_z=0.273
+[INFO] [1778077760.069186281] [live_aprilgrid_depth_check]: frame=39 tags=7 rms=0.09px layout=single_tags pose_z=1.145m pose_norm=1.212m da2=5.216m da2/pose_z=4.557 hw=0.311m hw/pose_z=0.272
+[INFO] [1778077760.277611565] [live_aprilgrid_depth_check]: FINAL samples=40 pose_z_med=1.144m rms_med=0.08px DA2/pose_z=4.4901 DA2 scale=0.2227
+[INFO] [1778077760.278854957] [live_aprilgrid_depth_check]: FINAL HW/pose_z=0.3609 HW scale=2.7705
+[INFO] [1778077760.279977712] [live_aprilgrid_depth_check]: Saved CSV: /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_aprilgrid_scale.csv
+[INFO] [1778077760.281126899] [live_aprilgrid_depth_check]: Saved summary: /home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_aprilgrid_scale_summary.json
