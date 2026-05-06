@@ -77,3 +77,8 @@ Current status:
   causes to separate are point-depth bias, ray/extrinsic projection, height
   filtering, BEV grid metadata, global map accumulation/pose, and LiDAR
   reference mismatch.
+- Live AprilTag projection check at the far board position showed expected
+  base_x `~3.335 m` but DA2-projected base_x `~2.019 m`
+  (`DA2/expected_x ~= 0.610x`). This matches the short DA2 point-depth behavior
+  and does not support the hypothesis that the runtime ray projection alone is
+  making far DA2 points larger in base_link.
