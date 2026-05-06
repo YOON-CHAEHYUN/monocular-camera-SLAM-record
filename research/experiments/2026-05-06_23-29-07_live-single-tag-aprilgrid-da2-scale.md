@@ -79,14 +79,33 @@ bash -lc source\ /opt/ros/humble/setup.bash\ \&\&\ source\ /home/jetson/colcon_w
 - **Fact:** The command exited with code `0`.
 - **Observation:** Raw command output is saved at [command.log](../raw/experiments/2026-05-06_23-29-07_live-single-tag-aprilgrid-da2-scale/command.log).
 - **Artifact paths:** [raw experiment directory](../raw/experiments/2026-05-06_23-29-07_live-single-tag-aprilgrid-da2-scale/)
-- **Result validity:** needs verification: mark valid, invalid, tentative, or superseded.
+- **Observation:** 40 valid frames were collected.
+- **Observation:** Median single-tag reprojection RMS was `0.076 px`.
+- **Observation:** Median pose_z was `1.144 m`.
+- **Observation:** DA2 sampled median was `5.123 m`, giving nominal
+  `DA2/pose_z = 4.490x` and scale `0.223`.
+- **Observation:** Hardware-depth sampled median was `0.413 m`, giving nominal
+  `HW/pose_z = 0.361x`.
+- **Artifact paths:**
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_aprilgrid_scale.csv`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_aprilgrid_scale_summary.json`,
+  `/home/jetson/colcon_ws/stella_camera_nav_experiments/results/live_single_tag_aprilgrid_scale.png`.
+- **Result validity:** pose estimate valid; sampled DA2/HW scale values invalid
+  until ROI alignment is corrected.
 
 ## Interpretation
 
-- **Interpretation:** pending review of single-tag scale summary
+ - **Interpretation:** The single-tag geometric pose is reliable enough to use
+  as a reference because RMS is below 0.1 px and pose_z is stable. The DA2 and
+  hardware-depth sampled values are not reliable scale estimates yet.
 - **Speculation:** tentative
 - **Hypothesis update:** unresolved
-- **Reasoning:** needs verification: explain why the result should or should not affect calibration/navigation decisions.
+- **Reasoning:** `da2_occupancy_node.py` rotates RGB by 180 degrees before DA2
+  inference and publishes `/da2/depth_raw` in that rotated coordinate system.
+  The checker sampled DA2 using an unrotated RGB tag mask, so the 5.1 m DA2
+  median likely comes from the wrong image region. Hardware depth is also not
+  confirmed color-aligned, and its 0.31-0.42 m values contradict the 1.14 m
+  pose.
 
 ## Finding Updates
 
@@ -98,7 +117,9 @@ No failure recorded by the runner. Review logs for warnings.
 
 ## Follow-up
 
-- If valid, repeat with board moved to a different distance and compare against hardware depth and BEV/LiDAR.
+- Rotate the DA2 sampling mask by 180 degrees before indexing `/da2/depth_raw`.
+- Verify or replace hardware-depth sampling with a color-aligned depth topic.
+- Re-run single-tag pose-vs-DA2 scale after ROI alignment is fixed.
 - Update [[Findings]] / [../findings.md](../findings.md) with a link to this note.
 - Update [[Open Questions]] / [../open_questions.md](../open_questions.md) and [[Next Steps]] / [../next_steps.md](../next_steps.md).
 - If the experiment produced invalid results, preserve the note and mark the invalidation reason.
@@ -110,4 +131,3 @@ No failure recorded by the runner. Review logs for warnings.
 - [[Findings]] / [../findings.md](../findings.md)
 - [[Open Questions]] / [../open_questions.md](../open_questions.md)
 - [[Next Steps]] / [../next_steps.md](../next_steps.md)
-

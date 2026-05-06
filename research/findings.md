@@ -43,4 +43,12 @@ Current status:
   `python3-apriltag` detector is installed and should be used next.
 - Rectangle-only board pose was invalidated because the estimated pose depth was
   physically impossible.
-
+- 2026-05-06 live AprilTag family probe found the board is detectable as
+  `tag16h5`, not `tag36h11`.
+- Full-grid AprilGrid solvePnP attempts remain invalid because reprojection RMS
+  is too high; ID layout and grid-slot ambiguity are unresolved.
+- Independent single-tag pose is geometrically stable
+  (`RMS ~= 0.076 px`, `pose_z ~= 1.144 m`), but the sampled DA2/HW depth values
+  are invalid as scale estimates until ROI alignment is fixed. DA2 depth is
+  published after a 180-degree image rotation, while the current checker sampled
+  it with an unrotated RGB mask.
