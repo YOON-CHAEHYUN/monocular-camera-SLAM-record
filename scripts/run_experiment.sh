@@ -31,8 +31,10 @@ note must still be completed before reporting results.
 
 The command runs from the directory where this script was invoked.
 It creates:
-  - research/experiments/YYYY-MM-DD_HH-MM-SS_<slug>.md
+  - research/experiments/<stable-purpose-slug>.md
   - research/raw/experiments/YYYY-MM-DD_HH-MM-SS_<slug>/command.log
+Repeated runs with the same title append to the same experiment note instead of
+creating a new note each time. Use the same title for the same research purpose.
 Then it calls scripts/auto_sync.sh.
 USAGE
 }
@@ -98,7 +100,7 @@ fi
 
 EXP_ID="${STAMP}_${SLUG}"
 EXP_DIR="$REPO_DIR/research/raw/experiments/$EXP_ID"
-EXP_NOTE="$REPO_DIR/research/experiments/$EXP_ID.md"
+EXP_NOTE="$REPO_DIR/research/experiments/$SLUG.md"
 LOG_PATH="$EXP_DIR/command.log"
 
 mkdir -p "$EXP_DIR"
@@ -119,22 +121,33 @@ END_TIME="$(date --iso-8601=seconds)"
 
 COMMIT_HASH="$(git -C "$CALL_DIR" rev-parse HEAD 2>/dev/null || true)"
 
-cat > "$EXP_NOTE" <<NOTE
+if [ ! -f "$EXP_NOTE" ]; then
+  cat > "$EXP_NOTE" <<NOTE
 # $TITLE
 
 ## Date
 
-$DATE
+Created: $DATE
+Last run: $DATE
 
 ## Title
 
-$TITLE
+- **한국어:** $TITLE
+- **English:** $TITLE
 
 ## Status
 
 $([ "$EXIT_CODE" -eq 0 ] && printf "completed" || printf "failed")
 
 ## Recording Contract
+
+This note is organized by research purpose, not by individual run. Repeated
+runs for the same purpose must be appended under `## Run History` instead of
+creating separate experiment files.
+
+Every substantive section should include both Korean and English when possible.
+Use paired bullets such as `한국어:` and `English:` rather than separate duplicate
+files.
 
 This experiment note is incomplete until it records all of the following:
 
@@ -150,25 +163,28 @@ Do not use the numeric result without this context.
 
 ## Motivation
 
-$MOTIVATION
+- **한국어:** $MOTIVATION
+- **English:** $MOTIVATION
 
 ## Research Question
 
-$QUESTION
+- **한국어:** $QUESTION
+- **English:** $QUESTION
 
 ## Hypothesis
 
-$HYPOTHESIS
+- **한국어:** $HYPOTHESIS
+- **English:** $HYPOTHESIS
 
 ## Setup
 
-- **Run directory:** \`$CALL_DIR\`
-- **Start time:** $START_TIME
-- **End time:** $END_TIME
-- **Exit code:** $EXIT_CODE
-- **Code commit hash:** ${COMMIT_HASH:-needs verification}
+- **Environment / 환경:** needs verification
+- **Code state / 코드 상태:** ${COMMIT_HASH:-needs verification}
+- **Artifact root / 산출물 루트:** [raw experiment directory](../raw/experiments/$EXP_ID/)
 
 ## Command / Config
+
+Latest run command:
 
 \`\`\`bash
 $COMMAND_TEXT
@@ -179,36 +195,37 @@ $COMMAND_TEXT
 
 ## Variables
 
-- **Independent variables:** needs verification
-- **Controlled variables:** needs verification
-- **Ablations:** needs verification
+- **Independent variables / 독립 변수:** needs verification
+- **Controlled variables / 통제 변수:** needs verification
+- **Ablations / Ablation:** needs verification
 
 ## Dataset / Split
 
-- **Dataset:** $DATASET
-- **Split:** needs verification
-- **Preprocessing:** needs verification
-- **Known caveats:** $CAVEATS
+- **Dataset / 데이터셋:** $DATASET
+- **Split / 분할:** needs verification
+- **Preprocessing / 전처리:** needs verification
+- **Known caveats / 주의점:** $CAVEATS
 
 ## Metrics
 
-- **Primary metrics:** $METRICS
-- **Secondary metrics:** needs verification
-- **Qualitative checks:** needs verification
+- **Primary metrics / 주 metric:** $METRICS
+- **Secondary metrics / 보조 metric:** needs verification
+- **Qualitative checks / 정성 확인:** needs verification
 
 ## Results
 
-- **Fact:** The command exited with code \`$EXIT_CODE\`.
-- **Observation:** Raw command output is saved at [command.log](../raw/experiments/$EXP_ID/command.log).
-- **Artifact paths:** [raw experiment directory](../raw/experiments/$EXP_ID/)
-- **Result validity:** needs verification: mark valid, invalid, tentative, or superseded.
+- **Fact / 사실:** The latest command exited with code \`$EXIT_CODE\`.
+- **Observation / 관찰:** Raw command output is saved at [command.log](../raw/experiments/$EXP_ID/command.log).
+- **Artifact paths / 산출물 경로:** [raw experiment directory](../raw/experiments/$EXP_ID/)
+- **Result validity / 결과 유효성:** needs verification: mark valid, invalid, tentative, or superseded.
 
 ## Interpretation
 
-- **Interpretation:** $INITIAL_INTERPRETATION
-- **Speculation:** tentative
-- **Hypothesis update:** unresolved
-- **Reasoning:** needs verification: explain why the result should or should not affect calibration/navigation decisions.
+- **한국어:** $INITIAL_INTERPRETATION
+- **English:** $INITIAL_INTERPRETATION
+- **Speculation / 추측:** tentative
+- **Hypothesis update / 가설 업데이트:** unresolved
+- **Reasoning / 판단 근거:** needs verification: explain why the result should or should not affect calibration/navigation decisions.
 
 ## Finding Updates
 
@@ -216,14 +233,33 @@ $COMMAND_TEXT
 
 ## Failure Notes
 
-$([ "$EXIT_CODE" -eq 0 ] && printf "No failure recorded by the runner. Review logs for warnings." || printf "Command failed. Review [command.log](../raw/experiments/$EXP_ID/command.log) before interpreting the result.")
+- **한국어:** $([ "$EXIT_CODE" -eq 0 ] && printf "러너 기준 실패는 기록되지 않았다. 경고 여부는 로그를 검토해야 한다." || printf "명령이 실패했다. 결과 해석 전에 [command.log](../raw/experiments/$EXP_ID/command.log)를 검토해야 한다.")
+- **English:** $([ "$EXIT_CODE" -eq 0 ] && printf "No failure recorded by the runner. Review logs for warnings." || printf "Command failed. Review [command.log](../raw/experiments/$EXP_ID/command.log) before interpreting the result.")
 
 ## Follow-up
 
-- $NEXT_ACTION
+- **한국어:** $NEXT_ACTION
+- **English:** $NEXT_ACTION
 - Update [[Findings]] / [../findings.md](../findings.md) with a link to this note.
 - Update [[Open Questions]] / [../open_questions.md](../open_questions.md) and [[Next Steps]] / [../next_steps.md](../next_steps.md).
 - If the experiment produced invalid results, preserve the note and mark the invalidation reason.
+
+## Run History
+
+### $STAMP
+
+- **Start time / 시작:** $START_TIME
+- **End time / 종료:** $END_TIME
+- **Exit code / 종료 코드:** $EXIT_CODE
+- **Run directory / 실행 디렉터리:** \`$CALL_DIR\`
+- **Commit hash / 커밋 해시:** ${COMMIT_HASH:-needs verification}
+- **Log / 로그:** [command.log](../raw/experiments/$EXP_ID/command.log)
+- **Raw artifacts / 원본 산출물:** [raw experiment directory](../raw/experiments/$EXP_ID/)
+- **Command / 명령:**
+
+\`\`\`bash
+$COMMAND_TEXT
+\`\`\`
 
 ## Links
 
@@ -234,6 +270,38 @@ $([ "$EXIT_CODE" -eq 0 ] && printf "No failure recorded by the runner. Review lo
 - [[Next Steps]] / [../next_steps.md](../next_steps.md)
 
 NOTE
+else
+  sed -i "0,/^Last run:/s/^Last run:.*/Last run: $DATE/" "$EXP_NOTE"
+
+  if ! grep -Fqx "## Run History" "$EXP_NOTE"; then
+    cat >> "$EXP_NOTE" <<'NOTE'
+
+## Run History
+NOTE
+  fi
+
+  cat >> "$EXP_NOTE" <<NOTE
+
+### $STAMP
+
+- **Start time / 시작:** $START_TIME
+- **End time / 종료:** $END_TIME
+- **Exit code / 종료 코드:** $EXIT_CODE
+- **Run directory / 실행 디렉터리:** \`$CALL_DIR\`
+- **Commit hash / 커밋 해시:** ${COMMIT_HASH:-needs verification}
+- **Log / 로그:** [command.log](../raw/experiments/$EXP_ID/command.log)
+- **Raw artifacts / 원본 산출물:** [raw experiment directory](../raw/experiments/$EXP_ID/)
+- **Command / 명령:**
+
+\`\`\`bash
+$COMMAND_TEXT
+\`\`\`
+
+- **Initial interpretation / 초기 해석:** $INITIAL_INTERPRETATION
+- **Next action / 다음 액션:** $NEXT_ACTION
+
+NOTE
+fi
 
 "$REPO_DIR/scripts/auto_sync.sh"
 

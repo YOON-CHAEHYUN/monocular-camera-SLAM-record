@@ -30,6 +30,8 @@ This workspace is a research Markdown vault for accumulating experiment records,
 9. Write in a style that can later be adapted into paper sections: Introduction, Related Work, Method, Results, Discussion, and Limitations.
 10. For experiments run on this SSH server, record available artifacts: log paths, config paths, command lines, dataset or split identifiers, commit hashes, environment details, output directories, and notable file paths.
 11. Keep filenames and headings stable so the vault remains readable after Git clone or rsync into local Obsidian.
+12. Write experiment notes bilingually. Important content must be recorded in Korean and English together, using paired labels such as `한국어:` and `English:`. Do not create separate duplicate Korean and English files.
+13. Group repeated runs by research purpose. If multiple runs test the same motivation, research question, and hypothesis, update one stable experiment note and append per-run details under `## Run History` instead of creating one note per run.
 
 ## File Roles
 
@@ -40,7 +42,7 @@ This workspace is a research Markdown vault for accumulating experiment records,
 - `research/next_steps.md`: prioritized follow-up actions.
 - `research/paper_outline.md`: evolving manuscript/report outline.
 - `research/sources.md`: papers, articles, datasets, repos, and other sources.
-- `research/experiments/`: one Markdown file per experiment, based on `research/experiments/TEMPLATE.md`.
+- `research/experiments/`: one Markdown file per research-purpose experiment, based on `research/experiments/TEMPLATE.md`. Repeated runs for the same purpose belong in the same note under `## Run History`.
 - `research/concepts/`: reusable concept notes and definitions.
 - `research/decisions/`: important research or engineering decisions with rationale.
 - `research/logs/`: dated research activity logs or session notes.
@@ -54,6 +56,8 @@ This workspace is a research Markdown vault for accumulating experiment records,
 - If a new result changes prior interpretation, update the affected hypothesis or finding status and add a dated note explaining why.
 - If a user asks to ingest a source, connect it to research questions, hypotheses, experiment design, findings, and the paper outline instead of only writing a paper summary.
 - If a user asks to reflect an experiment, create or update an experiment note first, then propagate only the distilled implications to context, hypotheses, findings, open questions, next steps, and paper outline.
+- For experiment notes, keep the filename stable and purpose-based. Prefer `research/experiments/<purpose-slug>.md` over timestamp-only names. Use timestamps inside `## Run History`.
+- When adding or editing experiment notes, provide Korean and English side by side for motivation, question, hypothesis, metrics, interpretation, and follow-up.
 
 ## Auto-Sync
 
@@ -67,7 +71,7 @@ This workspace is a research Markdown vault for accumulating experiment records,
 
 - Prefer event-based updates over time-based cron updates.
 - When starting a new test, use `scripts/run_experiment.sh "Experiment title" -- <command> [args...]`.
-- The runner creates a dated experiment note under `research/experiments/`, saves command output under `research/raw/experiments/`, and calls `scripts/auto_sync.sh`.
+- The runner creates or updates a stable purpose-based experiment note under `research/experiments/`, saves command output under `research/raw/experiments/`, appends per-run metadata under `## Run History`, and calls `scripts/auto_sync.sh`.
 - The generated experiment note is only a first-pass record. After the run, Codex should still review the note and logs, then update context, hypotheses, findings, open questions, next steps, and paper outline.
 - Before running the runner, set `EXP_MOTIVATION`, `EXP_QUESTION`,
   `EXP_HYPOTHESIS`, and `EXP_METRICS`. The harness requires these by default so

@@ -79,3 +79,7 @@ scripts/run_experiment.sh "Experiment title" -- <command> [args...]
 ```
 
 This creates a dated experiment note and saves the raw command output before committing the vault changes.
+
+Experiment notes should be bilingual. Record important content with Korean and English paired labels such as `한국어:` and `English:`.
+
+Repeated runs with the same research purpose should update one stable experiment note. Use `## Run History` for per-run timestamps, commands, logs, and artifact paths instead of creating a new file for every run.
